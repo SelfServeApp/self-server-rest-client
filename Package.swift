@@ -11,6 +11,11 @@ let package = Package(
             name: "SelfServerOpenAPI",
             targets: ["SelfServerOpenAPI"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.0.0"),
+        .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
