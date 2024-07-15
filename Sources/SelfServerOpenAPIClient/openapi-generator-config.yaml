@@ -1,0 +1,8 @@
+generate:
+  - client
+accessModifier: package
+additionalImports:
+  - RESTOpenAPITypes
+filter:
+  tags:
+    - library
