@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "self-server-types",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/edonv/self-server-types.git",
+      "state" : {
+        "revision" : "03fc5b1d1141e7cbbff83709e2ae7e73e00db71d",
+        "version" : "0.0.1"
+      }
+    },
+    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms",
