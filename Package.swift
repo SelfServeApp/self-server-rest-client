@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "SelfServerOpenAPI",
+    name: "self-server-rest-client",
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
