@@ -163,6 +163,15 @@
       }
     },
     {
+      "identity" : "swift-openapi-security-schemes",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/edonv/swift-openapi-security-schemes",
+      "state" : {
+        "revision" : "1bd116cb84fad983c61e04824d714103a3582ea4",
+        "version" : "0.1.2"
+      }
+    },
+    {
       "identity" : "swift-system",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",

@@ -27,6 +27,7 @@ let package = Package(
         
         // MARK: Misc
         .package(url: "https://github.com/edonv/self-server-types.git", from: "0.0.1"),
+        .package(url: "https://github.com/edonv/swift-openapi-security-schemes", from: "0.0.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -36,6 +37,10 @@ let package = Package(
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
+                
+                // MARK: Misc
+                .product(name: "SelfServerTypes", package: "self-server-types"),
+                .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),
             ],
             plugins: [
                 .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
