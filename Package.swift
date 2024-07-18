@@ -16,8 +16,8 @@ let package = Package(
             targets: ["SelfServerOpenAPITypes"]
         ),
         .library(
-            name: "SelfServerOpenAPIClient",
-            targets: ["SelfServerOpenAPITypes", "SelfServerOpenAPIClient"]
+            name: "SelfServerRESTClient",
+            targets: ["SelfServerOpenAPITypes", "SelfServerRESTClient"]
         ),
     ],
     dependencies: [
@@ -47,7 +47,7 @@ let package = Package(
             ]
         ),
         .target(
-            name: "SelfServerOpenAPIClient",
+            name: "SelfServerRESTClient",
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
@@ -63,7 +63,7 @@ let package = Package(
 
         .testTarget(
             name: "SelfServerOpenAPITests",
-            dependencies: ["SelfServerOpenAPIClient"]
+            dependencies: ["SelfServerRESTClient"]
         ),
     ]
 )

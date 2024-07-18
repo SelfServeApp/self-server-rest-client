@@ -2,7 +2,7 @@ generate:
   - client
 accessModifier: package
 additionalImports:
-  - RESTOpenAPITypes
+  - SelfServerOpenAPITypes
 filter:
   tags:
     - library
