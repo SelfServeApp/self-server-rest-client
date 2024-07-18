@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/edonv/self-server-types.git",
       "state" : {
-        "revision" : "03fc5b1d1141e7cbbff83709e2ae7e73e00db71d",
-        "version" : "0.0.1"
+        "revision" : "b83148d41606ce3e51ee91e2beaf9798620b2c4d",
+        "version" : "0.0.3"
       }
     },
     {
