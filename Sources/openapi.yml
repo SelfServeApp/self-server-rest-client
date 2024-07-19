@@ -171,8 +171,10 @@ components:
         multipart/form-data:
           schema:
             type: object
+            required:
+              - assets
             properties:
               assets:
                 description: Array of assets to be transferred.
-                type: array
-                items: {}
+                type: string
+                contentEncoding: binary
