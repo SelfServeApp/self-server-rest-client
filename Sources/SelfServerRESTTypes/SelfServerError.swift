@@ -58,7 +58,15 @@ extension SelfServerError {
         self.init(code: .abort(errorCode, reason: try? abortError.body.json.reason))
     }
     
+    package init(abortError: Components.Responses.AbortError, statusCode: Int) {
+        self.init(abortError: abortError, statusCode: .init(statusCode: statusCode))
+    }
+    
     package init(statusCode: HTTPResponseStatus, payload: OpenAPIRuntime.UndocumentedPayload) {
         self.init(code: .undocumented(statusCode: statusCode, payload: payload))
+    }
+    
+    package init(statusCode: Int, payload: OpenAPIRuntime.UndocumentedPayload) {
+        self.init(code: .undocumented(statusCode: .init(statusCode: statusCode), payload: payload))
     }
 }
