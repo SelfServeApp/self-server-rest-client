@@ -20,20 +20,31 @@ extension SelfServerRESTClient {
     ) async throws {
         let mappedStream = assetDataStream
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
-                return .assets(.init(payload: .init(body: .init(data))))
+                return .asset_chunk(
+                    .init(
+                        payload: .init(
+                            headers: .init(
+                                X_hyphen_Asset_hyphen_Name: "test",
+                                // TODO: use new HTTPRanges package
+                                Range: "bytes=0-"
+                            ),
+                            body: .init(data)
+                        )
+                    )
+                )
             }
         
         let output = try await self._client.fileUploadTest(
             path: .init(libraryID: libraryID.uuidString),
             headers: .init(
-                Transfer_hyphen_Encoding: .chunked,
+//                Transfer_hyphen_Encoding: .chunked,
                 X_hyphen_Request_hyphen_Id: transferID.uuidString
             ),
             body: .multipartForm(.init(mappedStream, iterationBehavior: .single))
         )
         
         switch output {
-        case .created(let result):
+        case .created:
             break
         case .clientError(let statusCode, let abortError),
                 .serverError(let statusCode, let abortError):
