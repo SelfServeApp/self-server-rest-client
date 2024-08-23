@@ -13,11 +13,11 @@ import SelfServerRESTTypes
 import SelfServerTypes
 
 extension SelfServerRESTClient {
-    public func streamTest(
+    public func streamTest<S: AsyncSequence>(
         libraryID: UUID,
         transferID: UUID,
-        assetDataStream: AsyncThrowingStream<Data, Error>
-    ) async throws {
+        assetDataStream: S
+    ) async throws where S.Element == Data, S: Sendable {
         let mappedStream = assetDataStream
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
                 return .asset_chunk(
