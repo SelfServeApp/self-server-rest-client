@@ -37,7 +37,6 @@ extension SelfServerRESTClient {
         let output = try await self._client.fileUploadTest(
             path: .init(libraryID: libraryID.uuidString),
             headers: .init(
-//                Transfer_hyphen_Encoding: .chunked,
                 X_hyphen_Request_hyphen_Id: transferID.uuidString
             ),
             body: .multipartForm(.init(mappedStream, iterationBehavior: .single))
