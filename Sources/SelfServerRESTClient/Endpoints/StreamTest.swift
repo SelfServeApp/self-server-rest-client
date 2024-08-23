@@ -29,7 +29,8 @@ extension SelfServerRESTClient {
                                 Range: "bytes=0-"
                             ),
                             body: .init(data)
-                        )
+                        ),
+                        filename: "Test File Name"
                     )
                 )
             }
