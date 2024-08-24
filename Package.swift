@@ -24,6 +24,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.0.0"),
         .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.0.0"),
         
         // MARK: Misc
         .package(url: "https://github.com/edonv/self-server-types.git", from: "0.0.1"),
@@ -37,6 +38,7 @@ let package = Package(
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
+                .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 
                 // MARK: Misc
                 .product(name: "SelfServerTypes", package: "self-server-types"),

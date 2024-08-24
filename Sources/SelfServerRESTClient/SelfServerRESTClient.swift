@@ -13,6 +13,8 @@ import OpenAPIAsyncHTTPClient
 import SelfServerRESTTypes
 import OpenAPISecuritySchemes
 
+import OpenAPIURLSession
+
 public final class SelfServerRESTClient: @unchecked Sendable {
     internal let _client: Client
     
@@ -21,7 +23,8 @@ public final class SelfServerRESTClient: @unchecked Sendable {
     private var sessionTokenMiddleware: SessionTokenMiddleware
     
     public init(_ url: URL) {
-        let transport = AsyncHTTPClientTransport()
+//        let transport = AsyncHTTPClientTransport()
+        let transport = URLSessionTransport()
         self.sessionTokenMiddleware = .init()
         
         self._client = .init(
