@@ -187,7 +187,7 @@ components:
                     type: string
                 Range:
                   description: Describes the byte range of the chunk.
-                  required: true
+                  required: false
                   schema:
                     type: string
                     pattern: ^(bytes)=(\d+-\d+)$
