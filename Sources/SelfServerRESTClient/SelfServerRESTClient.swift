@@ -16,6 +16,12 @@ import OpenAPISecuritySchemes
 import OpenAPIURLSession
 
 public final class SelfServerRESTClient: @unchecked Sendable {
+    private let _urlSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.waitsForConnectivity = false
+        return .init(configuration: config)
+    }()
+    
     internal let _client: Client
     
     /// The JWT token for the active session.
@@ -24,7 +30,9 @@ public final class SelfServerRESTClient: @unchecked Sendable {
     
     public init(_ url: URL) {
 //        let transport = AsyncHTTPClientTransport()
-        let transport = URLSessionTransport()
+        let transport = URLSessionTransport(
+            configuration: .init(session: _urlSession)
+        )
         self.sessionTokenMiddleware = .init()
         
         self._client = .init(
