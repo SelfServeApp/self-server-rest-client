@@ -24,9 +24,9 @@ extension SelfServerRESTClient {
                     .init(
                         payload: .init(
                             headers: .init(
-                                X_hyphen_Asset_hyphen_Name: "test",
+                                X_hyphen_Asset_hyphen_Name: "test"
                                 // TODO: use new HTTPRanges package
-                                Range: "bytes=0-"
+//                                Range: "bytes=0-"
                             ),
                             body: .init(data)
                         ),
