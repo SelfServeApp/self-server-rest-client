@@ -162,23 +162,21 @@ components:
             type: object
             required:
               - asset_chunk
-#              - asset_complete
+              - asset_complete
             properties:
               asset_chunk:
                 description: A chunk of an asset, as raw data.
                 type: array
                 items:
-                    type: string
-                    contentEncoding: binary
+                  type: string
+                  contentEncoding: binary
               asset_complete:
                 description: A part indicating that all the chunks of a file have been sent.
-                type: string
-                enum:
-                  - complete
-              asset:
-                description: An asset to be transferred. Multiple can be sent.
-                type: string
-                contentEncoding: binary
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - complete
           encoding:
             asset_chunk:
               headers:
@@ -188,8 +186,8 @@ components:
                   schema:
                     type: string
                 Range:
-                  description: Describes the byte range of the chunk.
-                  required: false
+                  description: The byte range of the chunk.
+                  required: true
                   schema:
                     type: string
                     pattern: ^(bytes)=(\d+-\d+)$
@@ -202,7 +200,7 @@ components:
                   schema:
                     type: string
                 Content-Length:
-                  description: Describes what should be the final combined length of the asset.
+                  description: The total size of the asset in bytes.
                   required: true
                   schema:
                     type: integer
