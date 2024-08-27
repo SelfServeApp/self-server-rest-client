@@ -65,7 +65,6 @@ paths:
       operationId: fileUploadTest
       parameters:
         - $ref: '#/components/parameters/LibraryIDPathParam'
-        - $ref: '#/components/parameters/ChunkedTransferHeader'
         - $ref: '#/components/parameters/RequestIDHeader'
       requestBody:
         $ref: '#/components/requestBodies/AssetTransfer'
@@ -145,16 +144,6 @@ components:
       style: simple
       schema:
         $ref: '#/components/schemas/UUID'
-    ChunkedTransferHeader:
-      name: Transfer-Encoding
-      in: header
-      required: true
-      description: Specifies that the request body should be sent in chunks.
-      style: simple
-      schema:
-        type: string
-        enum:
-          - chunked
     RequestIDHeader:
       name: X-Request-Id
       in: header
@@ -172,9 +161,46 @@ components:
           schema:
             type: object
             required:
-              - assets
+              - asset_chunk
+              - asset_complete
             properties:
-              assets:
-                description: Array of assets to be transferred.
-                type: string
-                contentEncoding: binary
+              asset_chunk:
+                description: A chunk of an asset, as raw data.
+                type: array
+                items:
+                  type: string
+                  contentEncoding: binary
+              asset_complete:
+                description: A part indicating that all the chunks of a file have been sent.
+                type: array
+                items:
+                  type: string
+                  enum:
+                    - complete
+          encoding:
+            asset_chunk:
+              headers:
+                X-Asset-Name:
+                  description: The name of the asset this chunk is a part of.
+                  required: true
+                  schema:
+                    type: string
+                Range:
+                  description: The byte range of the chunk.
+                  required: true
+                  schema:
+                    type: string
+                    pattern: ^(bytes)=(\d+-\d+)$
+                  example: bytes=0-50
+            asset_complete:
+              headers:
+                X-Asset-Name:
+                  description: The name of the asset completed.
+                  required: true
+                  schema:
+                    type: string
+                Content-Length:
+                  description: The total size of the asset in bytes.
+                  required: true
+                  schema:
+                    type: integer
