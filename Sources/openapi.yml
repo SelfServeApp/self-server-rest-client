@@ -162,7 +162,7 @@ components:
             type: object
             required:
               - asset_chunk
-              - asset_complete
+#              - asset_complete
             properties:
               asset_chunk:
                 description: A chunk of an asset, as raw data.
