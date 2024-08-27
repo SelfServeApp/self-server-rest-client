@@ -40,7 +40,7 @@ extension SelfServerRESTClient {
             headers: .init(
                 X_hyphen_Request_hyphen_Id: transferID.uuidString
             ),
-            body: .multipartForm(.init(mappedStream, iterationBehavior: .single))
+            body: .multipartForm(MultipartBody(mappedStream, iterationBehavior: .single))
         )
         
         switch output {
