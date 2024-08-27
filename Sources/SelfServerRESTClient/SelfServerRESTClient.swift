@@ -10,11 +10,14 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIAsyncHTTPClient
 
+import SelfServerRESTClientStubs
 import SelfServerRESTTypes
+import SelfServerHelperTypes
+
 import OpenAPISecuritySchemes
 
 public final class SelfServerRESTClient: @unchecked Sendable {
-    internal let _client: Client
+    internal let _client: SelfServerOpenAPIClient
     
     /// The JWT token for the active session.
     public private(set) var sessionToken: String? = nil

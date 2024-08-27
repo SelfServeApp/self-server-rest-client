@@ -9,8 +9,10 @@ import Foundation
 
 import OpenAPIRuntime
 
+import SelfServerRESTClientStubs
+
 import SelfServerRESTTypes
-import SelfServerTypes
+import SelfServerHelperTypes
 
 public enum FileTransferData: Hashable, Sendable {
     case assetChunk(Data, assetName: String, range: ClosedRange<Int>)
@@ -45,7 +47,7 @@ extension SelfServerRESTClient {
                             payload: .init(
                                 headers: .init(
                                     X_hyphen_Asset_hyphen_Name: assetName,
-                                    Content_hyphen_Length: Int(assetSize)
+                                    Content_hyphen_Length: assetSize
                                 ),
                                 body: .init("complete")
                             )
