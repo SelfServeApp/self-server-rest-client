@@ -166,8 +166,10 @@ components:
             properties:
               asset_chunk:
                 description: A chunk of an asset, as raw data.
-                type: string
-                contentEncoding: binary
+                type: array
+                items:
+                    type: string
+                    contentEncoding: binary
               asset_complete:
                 description: A part indicating that all the chunks of a file have been sent.
                 type: string
