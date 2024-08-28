@@ -23,13 +23,13 @@ extension SelfServerRESTClient {
         let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
                 switch data {
-                case .assetChunk(let chunk, let assetName, let range):
+                case .assetChunk(let chunk, let assetID, let range, let assetName):
                     return .asset_chunk(
                         .init(
                             payload: .init(
                                 headers: .init(
-                                    X_hyphen_Asset_hyphen_Name: assetName,
-                                    Range: range.description
+                                    X_hyphen_Asset_hyphen_ID: assetName, 
+                                    Content_hyphen_Range: range.description
                                 ),
                                 body: .init(chunk)
                             ),
@@ -42,11 +42,11 @@ extension SelfServerRESTClient {
                         .init(
                             payload: .init(
                                 headers: .init(
-                                    X_hyphen_Asset_hyphen_Name: assetName,
-                                    Content_hyphen_Length: assetSize
+                                    X_hyphen_Asset_hyphen_ID: assetName
                                 ),
                                 body: .init("complete")
-                            )
+                            ),
+                            filename: assetName
                         )
                     )
                 }
