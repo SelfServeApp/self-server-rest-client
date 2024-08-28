@@ -17,16 +17,18 @@ let package = Package(
         ),
     ],
     dependencies: [
+        // MARK: OpenAPI
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.0.0"),
+        .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
+        
+        // MARK: Self-Serve
         .package(
             url: "https://github.com/SelfServeApp/self-server-openapi-swift.git",
             branch: "main"
         ),
-        
-        .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
-        
-        // MARK: Misc
         .package(url: "https://github.com/SelfServeApp/self-server-extensions.git", from: "0.1.0"),
+        
+        // MARK: Helper
         .package(url: "https://github.com/edonv/swift-openapi-security-schemes", from: "0.0.1"),
     ],
     targets: [
