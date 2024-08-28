@@ -37,13 +37,15 @@ let package = Package(
         .target(
             name: "SelfServerRESTClient",
             dependencies: [
-                .product(name: "SelfServerRESTClientStubs", package: "self-server-openapi-swift"),
+                // MARK: OpenAPI
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
-                
                 .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
                 
-                // MARK: Misc
+                // MARK: Self-Serve
+                .product(name: "SelfServerRESTClientStubs", package: "self-server-openapi-swift"),
                 .product(name: "SelfServerHelperTypes", package: "self-server-extensions"),
+                
+                // MARK: Helper
                 .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),
             ]
         ),
