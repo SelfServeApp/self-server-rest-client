@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SelfServeApp/self-server-extensions.git",
       "state" : {
-        "revision" : "a0c1640bd96979620159b47c81c776b2867f6cde",
-        "version" : "0.1.3"
+        "revision" : "75b7204e3a4724716914255ee94778b850e11f96",
+        "version" : "0.2.4"
       }
     },
     {

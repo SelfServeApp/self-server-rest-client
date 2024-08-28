@@ -26,7 +26,7 @@ let package = Package(
             url: "https://github.com/SelfServeApp/self-server-openapi-swift.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/SelfServeApp/self-server-extensions.git", from: "0.1.0"),
+        .package(url: "https://github.com/SelfServeApp/self-server-extensions.git", from: "0.2.0"),
         
         // MARK: Helper
         .package(url: "https://github.com/edonv/swift-openapi-security-schemes", from: "0.0.1"),
@@ -45,6 +45,8 @@ let package = Package(
                 // MARK: Self-Serve
                 .product(name: "SelfServerRESTClientStubs", package: "self-server-openapi-swift"),
                 .product(name: "SelfServerHelperTypes", package: "self-server-extensions"),
+                .product(name: "SelfServerExtensions", package: "self-server-extensions"),
+                .product(name: "SelfServerDTOs", package: "self-server-extensions"),
                 
                 // MARK: Helper
                 .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),

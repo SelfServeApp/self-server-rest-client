@@ -8,25 +8,19 @@
 import Foundation
 
 import OpenAPIRuntime
-
 import SelfServerRESTClientStubs
-
 import SelfServerRESTTypes
-import SelfServerHelperTypes
-import HTTPRanges
 
-public enum FileTransferData: Hashable, Sendable {
-    case assetChunk(Data, assetName: String, range: HTTPRange)
-    case assetComplete(assetName: String, assetSize: Int64)
-}
+import SelfServerDTOs
+import SelfServerHelperTypes
+import SelfServerExtensions
+
 
 extension SelfServerRESTClient {
-    public func streamTest<S: AsyncSequence>(
-        libraryID: UUID,
-        transferID: UUID,
-        assetDataStream: S
-    ) async throws where S.Element == FileTransferData, S: Sendable {
-        let mappedStream = assetDataStream
+    public func assetTransfer(
+        _ transfer: SelfServeDTO.AssetTransfer
+    ) async throws {
+        let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
                 switch data {
                 case .assetChunk(let chunk, let assetName, let range):
@@ -38,7 +32,8 @@ extension SelfServerRESTClient {
                                     Range: range.description
                                 ),
                                 body: .init(chunk)
-                            )
+                            ),
+                            filename: assetName
                         )
                     )
                     
@@ -58,9 +53,9 @@ extension SelfServerRESTClient {
             }
         
         let output = try await self._client.fileUploadTest(
-            path: .init(libraryID: libraryID.uuidString),
+            path: .init(libraryID: transfer.libraryID.uuidString),
             headers: .init(
-                X_hyphen_Request_hyphen_Id: transferID.uuidString
+                X_hyphen_Request_hyphen_Id: transfer.transferID.uuidString
             ),
             body: .multipartForm(MultipartBody(mappedStream, iterationBehavior: .single))
         )
