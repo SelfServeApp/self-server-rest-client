@@ -13,9 +13,10 @@ import SelfServerRESTClientStubs
 
 import SelfServerRESTTypes
 import SelfServerHelperTypes
+import HTTPRanges
 
 public enum FileTransferData: Hashable, Sendable {
-    case assetChunk(Data, assetName: String, range: ClosedRange<Int>)
+    case assetChunk(Data, assetName: String, range: HTTPRange)
     case assetComplete(assetName: String, assetSize: Int64)
 }
 
@@ -34,7 +35,7 @@ extension SelfServerRESTClient {
                             payload: .init(
                                 headers: .init(
                                     X_hyphen_Asset_hyphen_Name: assetName,
-                                    Range: "bytes=\(range.lowerBound)-\(range.upperBound)"
+                                    Range: range.description
                                 ),
                                 body: .init(chunk)
                             )

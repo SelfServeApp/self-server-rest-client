@@ -73,6 +73,15 @@
       }
     },
     {
+      "identity" : "swift-http-ranges",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/edonv/swift-http-ranges.git",
+      "state" : {
+        "revision" : "6284e2e46fd7064201d6b0f0b232e4f5d86b7dee",
+        "version" : "0.1.0"
+      }
+    },
+    {
       "identity" : "swift-http-types",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-http-types",

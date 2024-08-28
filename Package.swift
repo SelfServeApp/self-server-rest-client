@@ -30,6 +30,7 @@ let package = Package(
         
         // MARK: Helper
         .package(url: "https://github.com/edonv/swift-openapi-security-schemes", from: "0.0.1"),
+        .package(url: "https://github.com/edonv/swift-http-ranges.git", from: "0.1.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -47,6 +48,7 @@ let package = Package(
                 
                 // MARK: Helper
                 .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),
+                .product(name: "HTTPRanges", package: "swift-http-ranges"),
             ]
         ),
 
