@@ -8,13 +8,10 @@
 import Foundation
 
 import OpenAPIRuntime
-import SelfServerRESTClientStubs
 import SelfServerRESTTypes
 
 import SelfServerDTOs
 import SelfServerHelperTypes
-import SelfServerExtensions
-
 
 extension SelfServerRESTClient {
     public func assetTransfer(
