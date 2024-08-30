@@ -67,7 +67,7 @@ extension SelfServerRESTClient {
         )
         
         switch output {
-        case .created:
+        case .ok:
             break
         case .clientError(let statusCode, let abortError),
                 .serverError(let statusCode, let abortError):
