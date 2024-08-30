@@ -28,7 +28,7 @@ extension SelfServerRESTClient {
                         .init(
                             payload: .init(
                                 headers: .init(
-                                    X_hyphen_Asset_hyphen_ID: assetName, 
+                                    X_hyphen_Asset_hyphen_ID: assetID,
                                     Content_hyphen_Range: range.description
                                 ),
                                 body: .init(chunk)
@@ -37,12 +37,12 @@ extension SelfServerRESTClient {
                         )
                     )
                     
-                case .assetComplete(let assetName, let assetSize):
+                case .assetComplete(let assetID, let assetName):
                     return .asset_complete(
                         .init(
                             payload: .init(
                                 headers: .init(
-                                    X_hyphen_Asset_hyphen_ID: assetName
+                                    X_hyphen_Asset_hyphen_ID: assetID
                                 ),
                                 body: .init("complete")
                             ),
