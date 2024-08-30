@@ -34,14 +34,23 @@ extension SelfServerRESTClient {
                         )
                     )
                     
-                case .assetComplete(let assetID, let assetName):
+                case .assetComplete(let assetID, let digest, let digestKind, let assetName):
+                    let kind: Components.Schemas.AssetCompletePart.digestKindPayload = switch digestKind {
+                    case .md5: .md5
+                    case .sha256: .sha256
+                    case .sha512: .sha512
+                    }
+                    
                     return .asset_complete(
                         .init(
                             payload: .init(
                                 headers: .init(
                                     X_hyphen_Asset_hyphen_ID: assetID
                                 ),
-                                body: .init("complete")
+                                body: .init(
+                                    digest: digest,
+                                    digestKind: kind
+                                )
                             ),
                             filename: assetName
                         )
