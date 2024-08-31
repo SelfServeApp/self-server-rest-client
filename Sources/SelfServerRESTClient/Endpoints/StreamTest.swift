@@ -20,7 +20,7 @@ extension SelfServerRESTClient {
         let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
                 switch data {
-                case .assetChunk(let chunk, let assetID, let range, let assetName):
+                case .assetChunk(let chunk, let range, let assetID, let assetName):
                     return .asset_chunk(
                         .init(
                             payload: .init(
@@ -34,7 +34,7 @@ extension SelfServerRESTClient {
                         )
                     )
                     
-                case .assetComplete(let assetID, let digest, let digestKind, let assetName):
+                case .assetComplete(let assetID, let assetName, let digest, let digestKind):
                     let kind: Components.Schemas.AssetCompletePart.digestKindPayload = switch digestKind {
                     case .md5: .md5
                     case .sha256: .sha256
@@ -48,7 +48,7 @@ extension SelfServerRESTClient {
                                     X_hyphen_Asset_hyphen_ID: assetID
                                 ),
                                 body: .init(
-                                    digest: digest,
+                                    digest: Base64EncodedData(digest),
                                     digestKind: kind
                                 )
                             ),
