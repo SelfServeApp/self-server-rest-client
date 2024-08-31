@@ -13,6 +13,16 @@ import SelfServerRESTTypes
 import SelfServerDTOs
 import SelfServerHelperTypes
 
+extension SelfServeDTO.AssetTransfer.DigestKind {
+    fileprivate func toSchema() -> Components.Schemas.AssetDigestKind {
+        switch self {
+        case .md5: .md5
+        case .sha256: .sha256
+        case .sha512: .sha512
+        }
+    }
+}
+
 extension SelfServerRESTClient {
     public func assetTransfer(
         _ transfer: SelfServeDTO.AssetTransfer
@@ -34,13 +44,7 @@ extension SelfServerRESTClient {
                         )
                     )
                     
-                case .assetComplete(let assetID, let assetName, let digest, let digestKind):
-                    let kind: Components.Schemas.AssetCompletePart.digestKindPayload = switch digestKind {
-                    case .md5: .md5
-                    case .sha256: .sha256
-                    case .sha512: .sha512
-                    }
-                    
+                case .assetComplete(let assetID, let assetName, let digest):
                     return .asset_complete(
                         .init(
                             payload: .init(
@@ -48,8 +52,7 @@ extension SelfServerRESTClient {
                                     X_hyphen_Asset_hyphen_ID: assetID
                                 ),
                                 body: .init(
-                                    digest: Base64EncodedData(digest),
-                                    digestKind: kind
+                                    digest: Base64EncodedData(digest)
                                 )
                             ),
                             filename: assetName
@@ -61,7 +64,8 @@ extension SelfServerRESTClient {
         let output = try await self._client.fileUploadTest(
             path: .init(libraryID: transfer.libraryID.uuidString),
             headers: .init(
-                X_hyphen_Request_hyphen_Id: transfer.transferID.uuidString
+                X_hyphen_Request_hyphen_Id: transfer.transferID.uuidString,
+                X_hyphen_Digest_hyphen_Kind: transfer.digestKind.toSchema()
             ),
             body: .multipartForm(MultipartBody(mappedStream, iterationBehavior: .single))
         )
