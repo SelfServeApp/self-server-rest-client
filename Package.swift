@@ -12,52 +12,40 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "SelfServerRESTTypes",
-            targets: ["SelfServerRESTTypes"]
-        ),
-        .library(
             name: "SelfServerRESTClient",
-            targets: ["SelfServerRESTTypes", "SelfServerRESTClient"]
+            targets: ["SelfServerRESTClient"]
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-openapi-generator", from: "1.0.0"),
+        // MARK: OpenAPI
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.0.0"),
         .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
         
-        // MARK: Misc
-        .package(url: "https://github.com/edonv/self-server-types.git", from: "0.0.1"),
+        // MARK: Self-Serve
+        .package(url: "https://github.com/SelfServeApp/self-server-openapi-swift.git", from: "0.1.3"),
+        .package(url: "https://github.com/SelfServeApp/self-server-extensions.git", from: "0.2.0"),
+        
+        // MARK: Helper
         .package(url: "https://github.com/edonv/swift-openapi-security-schemes", from: "0.0.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SelfServerRESTTypes",
-            dependencies: [
-                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
-                .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
-                
-                // MARK: Misc
-                .product(name: "SelfServerTypes", package: "self-server-types"),
-                .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),
-            ],
-            plugins: [
-                .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
-            ]
-        ),
-        .target(
             name: "SelfServerRESTClient",
             dependencies: [
+                // MARK: OpenAPI
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIAsyncHTTPClient", package: "swift-openapi-async-http-client"),
-                "SelfServerRESTTypes",
                 
-                // MARK: Misc
-                .product(name: "SelfServerTypes", package: "self-server-types"),
-            ],
-            plugins: [
-                .plugin(name: "OpenAPIGenerator", package: "swift-openapi-generator"),
+                // MARK: Self-Serve
+                .product(name: "SelfServerRESTClientStubs", package: "self-server-openapi-swift"),
+                .product(name: "SelfServerHelperTypes", package: "self-server-extensions"),
+                .product(name: "SelfServerExtensions", package: "self-server-extensions"),
+                .product(name: "SelfServerDTOs", package: "self-server-extensions"),
+                
+                // MARK: Helper
+                .product(name: "OpenAPISecuritySchemes", package: "swift-openapi-security-schemes"),
             ]
         ),
 

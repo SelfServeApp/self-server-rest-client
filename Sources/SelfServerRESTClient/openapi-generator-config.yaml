@@ -1,8 +1,0 @@
-generate:
-  - client
-accessModifier: package
-additionalImports:
-  - SelfServerRESTTypes
-filter:
-  tags:
-    - library
