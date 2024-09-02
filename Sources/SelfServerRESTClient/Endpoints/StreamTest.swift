@@ -26,7 +26,7 @@ extension SelfServeDTO.AssetTransfer.DigestKind {
 extension SelfServerRESTClient {
     public func assetTransfer(
         _ transfer: SelfServeDTO.AssetTransfer
-    ) async throws {
+    ) async throws -> Components.Schemas.AssetTransferResponseBody {
         let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
                 switch data {
@@ -71,8 +71,8 @@ extension SelfServerRESTClient {
         )
         
         switch output {
-        case .ok:
-            break
+        case .ok(let resp):
+            return try resp.body.json
         case .clientError(let statusCode, let abortError),
                 .serverError(let statusCode, let abortError):
             throw SelfServerError(abortError: abortError, statusCode: statusCode)
