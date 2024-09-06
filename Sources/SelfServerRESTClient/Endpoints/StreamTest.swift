@@ -73,9 +73,16 @@ extension SelfServerRESTClient {
         switch output {
         case .ok(let resp):
             return try resp.body.json
-        case .clientError(let statusCode, let abortError),
-                .serverError(let statusCode, let abortError):
-            throw SelfServerError(abortError: abortError, statusCode: statusCode)
+            
+        case .unauthorized(let resp):
+            throw SelfServerError(error401: resp)
+            
+        case .forbidden(let resp):
+            throw SelfServerError(error403: resp)
+        
+        case .internalServerError(let resp):
+            throw SelfServerError(error500: resp)
+            
         case .undocumented(let statusCode, let payload):
             throw SelfServerError(statusCode: statusCode, payload: payload)
         }
