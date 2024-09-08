@@ -10,10 +10,9 @@ import Foundation
 import OpenAPIRuntime
 import SelfServerRESTTypes
 
-import SelfServerDTOs
 import SelfServerHelperTypes
 
-extension SelfServeDTO.AssetTransfer.DigestKind {
+extension SelfServerDTOs.FileUploadTest.DigestKind {
     fileprivate func toSchema() -> Components.Schemas.AssetDigestKind {
         switch self {
         case .md5: .md5
@@ -25,7 +24,7 @@ extension SelfServeDTO.AssetTransfer.DigestKind {
 
 extension SelfServerRESTClient {
     public func fileUploadTest(
-        _ transfer: SelfServeDTO.AssetTransfer
+        _ transfer: SelfServerDTOs.FileUploadTest
     ) async throws -> Components.Schemas.AssetTransferResponseBody {
         let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
             .map { data -> Components.RequestBodies.AssetTransfer.multipartFormPayload in
