@@ -5,10 +5,9 @@
 //  Created by Edon Valdman on 7/17/24.
 //
 
-import OpenAPIRuntime
 import Foundation
-import HTTPTypes
 
+import OpenAPIRuntime
 import OpenAPISecuritySchemes
 
 /// A client middleware that injects a value into the `Authorization` header field of the request.
