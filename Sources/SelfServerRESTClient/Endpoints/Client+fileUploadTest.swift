@@ -1,5 +1,5 @@
 //
-//  StreamTest.swift
+//  Client+fileUploadTest.swift
 //  
 //
 //  Created by Edon Valdman on 7/18/24.
@@ -24,7 +24,7 @@ extension SelfServeDTO.AssetTransfer.DigestKind {
 }
 
 extension SelfServerRESTClient {
-    public func assetTransfer(
+    public func fileUploadTest(
         _ transfer: SelfServeDTO.AssetTransfer
     ) async throws -> Components.Schemas.AssetTransferResponseBody {
         let mappedStream = transfer.resourcesStream(options: nil, resourceHandler: nil)
