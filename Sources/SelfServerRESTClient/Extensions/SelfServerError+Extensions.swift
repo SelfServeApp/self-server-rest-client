@@ -17,7 +17,7 @@ extension SelfServerError {
         self.init(unauthorized401: response.headers.WWW_hyphen_Authenticate)
     }
     
-    /// A convenience initializer from a `GeneralError` response, which should have a `500`/`Internal Server Error` status code.
+    /// A convenience initializer from a `GeneralError` response, which should have a `403`/`Forbidden` status code.
     internal init(error403 response: Components.Responses._403ForbiddenResponse) {
         guard let errorCodeInt = response.headers.X_hyphen_Self_hyphen_Server_hyphen_Error_hyphen_Code,
               let errorCode = SelfServerErrorCode(rawValue: UInt(errorCodeInt)) else {
