@@ -73,6 +73,9 @@ extension SelfServerRESTClient {
         case .ok(let resp):
             return try resp.body.json
             
+        case .badRequest(let resp):
+            throw SelfServerError(error400: resp)
+            
         case .unauthorized(let resp):
             throw SelfServerError(error401: resp)
             
