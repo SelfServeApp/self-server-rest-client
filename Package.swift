@@ -22,7 +22,7 @@ let package = Package(
         .package(url: "https://github.com/swift-server/swift-openapi-async-http-client", from: "1.0.0"),
         
         // MARK: Self-Serve
-        .package(url: "https://github.com/SelfServeApp/self-server-openapi-swift.git", branch: "new-library"),
+        .package(url: "https://github.com/SelfServeApp/self-server-openapi-swift.git", from: "0.2.4"),
         .package(url: "https://github.com/SelfServeApp/self-server-extensions.git", from: "0.2.0"),
         
         // MARK: Helper
