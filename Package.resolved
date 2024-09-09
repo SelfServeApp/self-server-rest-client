@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SelfServeApp/self-server-openapi-swift.git",
       "state" : {
-        "revision" : "92b3e478c74307a6de6597c4e348e7f4a2bd709f",
-        "version" : "0.2.6"
+        "branch" : "new-library",
+        "revision" : "93ab172b1dcc221161acc2c644f80e683fdee880"
       }
     },
     {
