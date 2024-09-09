@@ -71,22 +71,28 @@ extension SelfServerRESTClient {
         
         switch output {
         case .ok(let resp):
-            return try resp.body.json
+            switch resp.body {
+            case .json(let body):
+                return body
+            }
             
         case .badRequest(let resp):
-            throw SelfServerError(error400: resp)
+            throw SelfServerError(response: resp)
+                ?? UnknownCodeError(status: .badRequest, response: resp)
             
         case .unauthorized(let resp):
-            throw SelfServerError(error401: resp)
+            throw UnauthorizedRequestError(operationID: "fileUploadTest", response: resp)
             
         case .forbidden(let resp):
-            throw SelfServerError(error403: resp)
+            throw SelfServerError(response: resp)
+                ?? UnknownCodeError(status: .forbidden, response: resp)
         
         case .internalServerError(let resp):
-            throw SelfServerError(error500: resp)
+            throw SelfServerError(response: resp)
+                ?? UnknownCodeError(status: .internalServerError, response: resp)
             
         case .undocumented(let statusCode, let payload):
-            throw SelfServerError(statusCode: statusCode, payload: payload)
+            throw UndocumentedResponseError(statusCode: .init(statusCode: statusCode), payload: payload)
         }
     }
 }
