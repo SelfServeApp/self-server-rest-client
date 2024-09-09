@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SelfServeApp/self-server-extensions.git",
       "state" : {
-        "revision" : "4ab9ebf80b87236913854e621a6ade1976e09602",
-        "version" : "0.3.9"
+        "revision" : "6a0aa3271ff5c88879f605913dae078cd3dde5a6",
+        "version" : "0.3.15"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/SelfServeApp/self-server-openapi-swift.git",
       "state" : {
         "branch" : "new-library",
-        "revision" : "e8935b46bc44ce955afb1fe78bcf6db7dc9e7e2d"
+        "revision" : "65b896f9b4db8f13cafdb4ac93d83c5c0adb52b5"
       }
     },
     {
