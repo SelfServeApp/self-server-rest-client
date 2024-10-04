@@ -46,8 +46,7 @@ extension SelfServerRESTClient {
             )
             
         case .conflict(let resp):
-            throw SelfServerError(response: resp)
-                ?? UnknownCodeError(status: .conflict, response: resp)
+            throw SelfServerError(conflict: resp)
             
         case .internalServerError(let resp):
             throw SelfServerError(response: resp)
