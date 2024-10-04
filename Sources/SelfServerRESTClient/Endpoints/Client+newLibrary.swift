@@ -39,7 +39,11 @@ extension SelfServerRESTClient {
                 ?? UnknownCodeError(status: .badRequest, response: resp)
             
         case .unauthorized(let resp):
-            throw UnauthorizedRequestError(operationID: "newLibrary", response: resp)
+            throw UnauthorizedRequestError(
+                operationID: #function
+                    .trimmingCharacters(in: .alphanumerics.inverted),
+                response: resp
+            )
             
         case .conflict(let resp):
             throw SelfServerError(response: resp)
