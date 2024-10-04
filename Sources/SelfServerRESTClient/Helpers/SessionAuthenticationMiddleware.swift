@@ -12,7 +12,7 @@ import OpenAPISecuritySchemes
 
 /// A client middleware that injects a value into the `Authorization` header field of the request.
 package struct SessionTokenSecurityScheme: BearerHTTPSecurityScheme {
-    package static let bearerFormat: HTTPSecuritySchemeName.BearerFormat? = .jwt
+    package static let bearerFormat: HTTPSecuritySchemeType.BearerFormat? = .jwt
     
     package let accessToken: String
     
